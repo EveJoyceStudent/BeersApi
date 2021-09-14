@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BeersLib {
     public class Beer {
@@ -13,6 +15,7 @@ namespace BeersLib {
         public uint Ibu { get; set; }
         public int Amount { get; set; }
         public float Cost { get; set; }
+        // [JsonIgnore]
         public bool Open { get; set; }
 
         public Beer () {}

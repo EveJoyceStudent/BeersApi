@@ -141,6 +141,60 @@ namespace BeersApi.Handlers
 
             return rowsAffected;
         }
+        
+        public int updateBeer(Beer updateBeer) {
+            // TODO:  Code to insert updateBeer into the DB goes here.
+            int rowsAffected;
+
+            string query = "UPDATE BEER SET BREWERY=@brewery, ABV=@abv, IBU=@ibu, AMOUNT=@amount, COST=@cost, [OPEN]=@opened WHERE [Name]=@name";
+
+            using(SqlConnection connection = new SqlConnection(connectionString)) {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                 
+                // SqlParameter is used to protect against SQL Injection
+                SqlParameter nameParam = new SqlParameter();
+                nameParam.ParameterName = "@name";
+                nameParam.Value = updateBeer.Name;
+
+                SqlParameter breweryParam = new SqlParameter();
+                breweryParam.ParameterName = "@brewery";
+                breweryParam.Value = updateBeer.Brewery;
+
+                SqlParameter abvParam = new SqlParameter();
+                abvParam.ParameterName = "@abv";
+                abvParam.Value = updateBeer.Abv;
+
+                SqlParameter ibuParam = new SqlParameter();
+                ibuParam.ParameterName = "@ibu";
+                ibuParam.Value = (int)updateBeer.Ibu;
+
+                SqlParameter amountParam = new SqlParameter();
+                amountParam.ParameterName = "@amount";
+                amountParam.Value = updateBeer.Amount;
+
+                SqlParameter costParam = new SqlParameter();
+                costParam.ParameterName = "@cost";
+                costParam.Value = updateBeer.Cost;
+
+                SqlParameter openedParam = new SqlParameter();
+                openedParam.ParameterName = "@opened";
+                openedParam.Value = updateBeer.Open;
+
+                command.Parameters.Add(nameParam);
+                command.Parameters.Add(breweryParam);
+                command.Parameters.Add(abvParam);
+                command.Parameters.Add(ibuParam);
+                command.Parameters.Add(amountParam);
+                command.Parameters.Add(costParam);
+                command.Parameters.Add(openedParam);
+
+                rowsAffected = command.ExecuteNonQuery();
+
+            }
+
+            return rowsAffected;
+        }
     }
 
 }

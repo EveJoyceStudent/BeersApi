@@ -30,6 +30,12 @@ namespace BeersApi.Controllers {
             // TODO:  this needs to use the database handler to add a new
             return this.dbh.addNewBeer(newBeer); 
         }
+
+        [HttpPut]
+        public int PutUpdate(Beer updateBeer){
+            // beers.UpdateBeer(updateBeer);
+            return this.dbh.updateBeer(updateBeer);
+        }
     }
 
 }
